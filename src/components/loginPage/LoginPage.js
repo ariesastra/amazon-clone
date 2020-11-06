@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
-import {Link} from 'react-router-dom'
+import {Link, useHistory} from 'react-router-dom'
+import {auth} from '../../api/firebase'
 
 // component
 
@@ -10,19 +11,41 @@ import '../../scss/LoginPage.scss'
 import { Button } from '@material-ui/core';
 
 function LoginPage() {
+    const history = useHistory();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
+    // AUTHENTICATION WITH FIREBASE
     const signIn = e => {
         // Firebase Connection
-        
+        auth.signInWithEmailAndPassword(email, password)
+        .then(
+            auth => {
+                history.push('/')
+            }
+        ).catch(
+            error => alert(error.message)
+        )
         
         e.preventDefault();
     }
 
     const register = e => {
         // Firebase Connection
-
+        auth.createUserWithEmailAndPassword(
+            email, 
+            password,
+        ).then(
+            (auth) => {
+                // it success create new user with email and password
+                console.log(auth);
+                if (auth) {
+                    history.push('/')
+                }
+            }
+        ).catch(
+            error => alert(error.message)
+        )
 
         e.preventDefault();
     }
@@ -53,7 +76,6 @@ function LoginPage() {
                 <p>
                     By continuing, you agree to Arie Sastra's E-Commerce <a href="https://www.amazon.com/gp/help/customer/display.html/ref=ap_signin_notification_condition_of_use?ie=UTF8&nodeId=508088">Conditions of Use</a> and <a href="https://www.amazon.com/gp/help/customer/display.html/ref=ap_signin_notification_privacy_notice?ie=UTF8&nodeId=468496">Privacy Notice</a>.
                 </p>
-
                 <Button className="loginpage__register" onClick={register}>
                     Sign Up Here
                 </Button>
