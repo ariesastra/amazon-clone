@@ -47,7 +47,7 @@ function App() {
     <Router>
       <div className="App">
         <Switch>
-          <Route to="/order">
+          <Route path="/order">
             <Header />
             {/* <Order /> */}
           </Route>

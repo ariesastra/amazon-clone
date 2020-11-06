@@ -13,7 +13,7 @@ function CheckoutPage() {
     const [{basket, user}, dispatch] = useStateValue();
 
     return (
-        <div className="checkoutPage" key={user.email}>
+        <div className="checkoutPage" key={user?.email}>
             <div className="checkoutPage__left">
                 <img src="https://images-na.ssl-images-amazon.com/images/G/01/kindle/apub/2020HolidayKEXDeals/20201103_US_P40996903-Holiday-KEX-Weekly-Deal_600x45-ILM._CB417918412_.jpg" alt="amazon ad" className="checkoutPage__ad"/>
                 <div>
