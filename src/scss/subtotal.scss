@@ -1,0 +1,28 @@
+@import "variable";
+
+.subtotal {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 300px;
+  height: 100px;
+  padding: 20px;
+  background-color: $color-5;
+  border: 1px solid $color-6;
+  border-radius: 3px;
+  .subtotal__gift {
+    display: flex;
+    align-items: center;
+    input {
+      margin-right: 5px;
+    }
+  }
+  .checkout__button {
+    background: $color-2;
+    border: 1px solid;
+    border-color: $color-border-1 $color-border-2 $color-border-3;
+    color: $color-4;
+    margin-top: 10px;
+    font-weight: 800;
+  }
+}

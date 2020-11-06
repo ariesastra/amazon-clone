@@ -1,0 +1,32 @@
+@import "variable";
+.checkoutProduct {
+  display: flex;
+  flex: 1;
+  margin: 20px 0;
+  .checkoutProduct__image {
+    width: 180px;
+    height: 180px;
+    object-fit: contain;
+  }
+  .checkoutProduct__info {
+    padding-left: 20px;
+    .checkoutProduct__title {
+      font-size: 17px;
+      font-weight: 800;
+    }
+    .checkoutProduct__price {
+    }
+    .checkoutProduct__rating {
+      display: flex;
+    }
+    .checkoutProduct__btn {
+      background: $color-2;
+      border: 1px solid;
+      border-color: $color-border-1 $color-border-2 $color-border-3;
+      color: $color-4;
+      margin-top: 10px;
+      font-weight: 800;
+      font-size: 10px;
+    }
+  }
+}

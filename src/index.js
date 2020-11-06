@@ -1,12 +1,21 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
+
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+// Redux
+import {StateProvider} from './redux/StateProvider';
+import reducer, {initialState} from './redux/reducer';
+
+// Style
+import './scss/index.scss';
+
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+      <StateProvider initialState={initialState} reducer={reducer}>
+        <App />
+      </StateProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );

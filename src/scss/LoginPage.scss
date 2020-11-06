@@ -1,0 +1,62 @@
+@import "variable";
+.loginpage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
+  background-color: $color-1;
+  .loginpage__logo {
+    margin: 20px auto;
+    width: 100px;
+    object-fit: contain;
+  }
+  .loginpage__container {
+    width: 300px;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    border-radius: 5px;
+    border: 1px solid lightgray;
+    padding: 20px;
+    h1 {
+      font-weight: 500;
+      margin-bottom: 20px;
+    }
+    p {
+      font-size: 12px;
+      margin-top: 15px;
+    }
+    .loginpage__form {
+      h5 {
+        margin-bottom: 5px;
+      }
+      .loginpage__input {
+        height: 30px;
+        margin-bottom: 10px;
+        background-color: $color-1;
+        width: 98%;
+      }
+      .loginpage__button {
+        background: $color-2;
+        border: 1px solid;
+        border-color: $color-border-1 $color-border-2 $color-border-3;
+        color: $color-4;
+        margin-top: 10px;
+        font-weight: 800;
+        width: 100%;
+      }
+    }
+    .loginpage__register {
+      width: 100%;
+      border-radius: 2px;
+      color: $color-1;
+      border: 1px solid;
+      margin-top: 10px;
+      font-weight: 800;
+      background-color: $color-6;
+      border-color: $color-5;
+      font-size: 12px;
+      height: 30px;
+    }
+  }
+}
