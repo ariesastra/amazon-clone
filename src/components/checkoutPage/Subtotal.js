@@ -10,8 +10,10 @@ import '../../scss/subtotal.scss'
 import { Button } from '@material-ui/core';
 import { useStateValue } from '../../redux/StateProvider';
 import { getBasketTotal } from '../../redux/reducer';
+import { useHistory } from 'react-router-dom';
 
 function Subtotal() {
+    const history = useHistory();
     const [{basket}, dispatch] = useStateValue();
 
     return (
@@ -33,7 +35,7 @@ function Subtotal() {
                 thousandSeparator={true}
                 prefix={"$"}
             />
-            <Button className="checkout__button">
+            <Button className="checkout__button" onClick={e => history.push('/payment')}>
                 Proceed to Checkout
             </Button>
         </div>

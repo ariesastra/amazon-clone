@@ -1,0 +1,35 @@
+@import "variable";
+
+.payment {
+  background-color: $color-1;
+
+  .payment__container {
+    h1 {
+      text-align: center;
+      padding: 10px;
+      font-weight: 400;
+      background-color: rgb(234, 237, 237);
+      border-bottom: 1px solid lightgray;
+      a {
+        text-decoration: none;
+      }
+    }
+    .payment__section {
+      display: flex;
+      padding: 20px;
+      margin: 0 20px;
+      border-bottom: 1px solid lightgray;
+      .payment__title {
+        flex: 0.2;
+      }
+      .payment__address,
+      .payment__items {
+        margin: 0 20px;
+        float: 0.8;
+      }
+      .payment__detail {
+        flex: 0.8;
+      }
+    }
+  }
+}

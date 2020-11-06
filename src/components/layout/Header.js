@@ -55,7 +55,7 @@ function Header() {
                 <Link to={!user && '/login'}>
                     <div className="header__option" onClick={handleAuth}>
                         <span className="header__optionLineOne">
-                            {user ? `Hello ${user.email}` : 'Hello Guest'}
+                            {!user ? 'Hello Guest' : `Hello ${user.email}`}
                         </span>
                         <span className="header__optionLineTwo">
                             {/* If there are user, wite Sign Out or write Sign In */}
