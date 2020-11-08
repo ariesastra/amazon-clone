@@ -11,6 +11,7 @@ import { useStateValue } from './redux/StateProvider'
 import Payment from './components/checkoutPage/Payment'
 import {loadStripe} from '@stripe/stripe-js'
 import {Elements} from '@stripe/react-stripe-js'
+import Order from './components/checkoutPage/Order'
 
 // Style
 import './scss/App.scss';
@@ -47,16 +48,11 @@ function App() {
     <Router>
       <div className="App">
         <Switch>
-          <Route path="/order">
+          <Route path="/orders">
+            {/* Header Nav */}
             <Header />
-            {/* <Order /> */}
-          </Route>
-          <Route path="/payment">
-            <Header />
-            {/* Stripe Element for Payment Page */}
-            <Elements stripe={promise}>
-              <Payment />
-            </Elements>
+            {/* Checkout Page */}
+            <Order />
           </Route>
           <Route path="/login">
             {/* login page */}
@@ -67,6 +63,13 @@ function App() {
             <Header />
             {/* Checkout Page */}
             <CheckoutPage />
+          </Route>
+          <Route path="/payment">
+            <Header />
+            {/* Stripe Element for Payment Page */}
+            <Elements stripe={promise}>
+              <Payment />
+            </Elements>
           </Route>
           <Route path="/">
             {/* Header Nav */}

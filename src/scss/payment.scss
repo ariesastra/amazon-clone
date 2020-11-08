@@ -21,6 +21,9 @@
       border-bottom: 1px solid lightgray;
       .payment__title {
         flex: 0.2;
+        h4 {
+          padding-bottom: 20px;
+        }
       }
       .payment__address,
       .payment__items {
@@ -29,6 +32,20 @@
       }
       .payment__detail {
         flex: 0.8;
+        form {
+          max-width: 400px;
+          button {
+            background-color: $color-2;
+            border-radius: 2px;
+            width: 100%;
+            height: 30px;
+            border: 1px solid;
+            font-weight: bolder;
+            margin-top: 10px;
+            border-color: $color-border-1 $color-border-2 $color-border-3;
+            color: $color-4;
+          }
+        }
       }
     }
   }

@@ -7,7 +7,7 @@ import '../../scss/checkoutProduct.scss'
 import { Button } from '@material-ui/core';
 import StarIcon from '@material-ui/icons/Star'
 
-function CheckoutProducts({id, image, title, price, rating}) {
+function CheckoutProducts({id, image, title, price, rating, hideButton}) {
     const [{basket}, dispatch] = useStateValue();
     const removeFromBasket = () => {
         // remove an item from basket
@@ -40,9 +40,11 @@ function CheckoutProducts({id, image, title, price, rating}) {
                         ))
                     }
                 </p>
-                <Button className="checkoutProduct__btn" onClick={removeFromBasket}>
-                    Remove from Basket
-                </Button>
+                {!hideButton && (
+                    <Button className="checkoutProduct__btn" onClick={removeFromBasket}>
+                        Remove from Basket
+                    </Button>
+                )}
             </div>
         </div>
     )

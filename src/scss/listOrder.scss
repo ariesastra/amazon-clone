@@ -1,0 +1,15 @@
+@import "variable";
+
+.listOrder {
+  padding: 40px;
+  margin: 20px 0;
+  border-color: 1px solid lightgray;
+  background-color: white;
+  position: relative;
+
+  .listOrder__id {
+    position: absolute;
+    top: 40px;
+    right: 20px;
+  }
+}

@@ -31,7 +31,6 @@ function CheckoutPage() {
                             image={item.image}
                         />
                     ))}
-
                 </div>
             </div>
             <div className="checkoutPage__right">

@@ -8,12 +8,13 @@ import CheckoutProducts from './CheckoutProducts';
 import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
 import {getBasketTotal} from '../../redux/reducer'
 import axios from '../../api/axios'
+import {db} from '../../api/firebase'
 
 // sytle
 import '../../scss/payment.scss'
 
 // material ui
-import {Button} from '@material-ui/core'
+
 
 function Payment() {
     const [{basket, user}, dispatch] = useStateValue();
@@ -21,7 +22,7 @@ function Payment() {
     const [disabled, setDisable] = useState(true);
     const [succeeded, setSucceeded] = useState(true);
     const [processing, setProcessing] = useState('');
-    const [clietSecret, setClientSecret] = useState(true);
+    const [clientSecret, setClientSecret] = useState(true);
     const history = useHistory();
 
     const stripe = useStripe();
@@ -35,37 +36,60 @@ function Payment() {
                 // Stripe Expect the total in a currents subunits
                 url: `/payments/create?total=${getBasketTotal(basket) * 100}`
             });
-            setClientSecret(response.data.clietSecret);
+            setClientSecret(response.data.clientSecret)
         }
 
         getClientSecret();
     }, [basket]);
 
-    const handleSubmit = async (e) => {
+    // console.log('THE SECRET IS >>>', clientSecret);//debug
+    console.log('user :', user?.uid);
+
+    const handleSubmit = async (event) => {
         // All about Stripe function
-        e.preventDefault();
+        event.preventDefault();
         setProcessing(true);
 
-        const payload = await stripe.confirmCardPayment(clietSecret, {
+        const payload = await stripe.confirmCardPayment(clientSecret, {
             payment_method: {
                 card: elements.getElement(CardElement)
             }
         }).then(({paymentIntent}) => {
+            // put user data to firestroe db
+            db.collection('users')
+            .doc(user?.uid)
+            .collection('orders')
+            .doc(paymentIntent.id)
+            .set({
+                    basket: basket,
+                    amount: paymentIntent.amount,
+                    created: paymentIntent.created,
+            });
+
             // this is payment confirmation
             setSucceeded(true);
             setError(null);
             setProcessing(false);
 
-            history.replaceState('/orders');
+            dispatch({
+                type: 'EMPTY_BASKET'
+            });
+
+            history.replace('/orders');
         });
     }
 
-    const handleChange = e => {
+    const handleChange = event => {
         // Listen for change in card element
+        if (event.complete) {
+            // console.log(document.querySelectorAll('form > button'));
+            document.querySelectorAll('form > button')[0].removeAttribute('disabled');
+            // document.querySelectorAll('form > button')[0].classList.remove('Mui-disabled');
+        }
 
         // display error
-        setDisable(e.empty);
-        setError(e.error ? e.error.message : "");
+        setDisable(event.empty);
+        setError(event.error ? event.error.message : "");
     }
 
     return (
@@ -113,7 +137,10 @@ function Payment() {
                     <div className="payment__detail">
                         {/* Stripe magic will go Here ! */}
                         <form onSubmit={handleSubmit}>
+                            {/* Card Element from Stripe */}
                             <CardElement onChange={handleChange}/>
+                            
+                            {/* Subtotal */}
                             <div className="payment__priceContainer">
                                 {/* Using Currency Format from NPM */}
                                 <CurrencyFormat 
@@ -131,9 +158,10 @@ function Payment() {
                                     prefix={"$"}
                                 />
                             </div>
-                            <Button disabled={processing || disabled || succeeded}>
+                            
+                            <button disabled>
                                     <span>{processing ? <p>Processing</p> : 'Buy Now '}</span>
-                            </Button>
+                            </button>
                             {/* Error */}
                             {error && <div>{error}</div>}
                         </form>
