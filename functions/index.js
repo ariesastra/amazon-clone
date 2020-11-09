@@ -2,7 +2,7 @@ const functions = require('firebase-functions');
 const express = require('express');
 const cors = require('cors');
 const { request, response } = require('express');
-import {stripeKey} from './stripe';
+const stripeKey = require('./stripe');
 
 // Stripe
 const stripe = require('stripe')(stripeKey);
